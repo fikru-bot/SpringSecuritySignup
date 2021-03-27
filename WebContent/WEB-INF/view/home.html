@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		
+		<a sec:authorize="hasRole('ADMIN')" th:href="@{/addTour}" class="btn btn-primary">Add a new tour</a>
+		<a th:href="@{/showOffer}" class="btn btn-primary">Show our offer</a>
+		<a th:href="@{/showOfferForNextYear}" class="btn btn-primary">Show next month offer</a>
+		<a sec:authorize="hasRole('CLIENT')" th:href="@{/addComment}" class="btn btn-primary">Add comment</a>
+		<a sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-secondary float-right">Login</a>
+		<a sec:authorize="!isAnonymous()" th:href="@{/logout}" class="btn btn-secondary float-right">Logout</a>
+		
+		<br>
+		<br>
+		
+		<h1>Hello <span sec:authorize="isAuthenticated()">
+								<span sec:authentication="name"></span>
+							</span>
+							<span sec:authorize="isAnonymous()">dear guest</span>
+		</h1>
+		<h2>Welcome to our travel agency</h2>
+		
+	</div>
+</body>
+</html>
